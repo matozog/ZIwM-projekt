@@ -1,26 +1,32 @@
 from src.utils import file_reader
-from src.patient import Patient
+import random
 
 
-def loadDataFromFile(file_name, size_of_data):
-    patients = []
-    data = file_reader.readDataFromFile(file_name)
-    data_array = data.split("\n")
-    for row in data_array:
-        formatted_row = row.split(",")
-        if formatted_row.__len__() == size_of_data:
-            patient = Patient(formatted_row[0], formatted_row[1], formatted_row[2:size_of_data])
-            patients.append(patient)
-    return patients
+def createTeachingAndTestSets(patients):
+    teachingSet = []
+    testSet = []
+    halfOfPatients = int(patients.__len__()/2)
+    drawnNumbers = []
 
+    while teachingSet.__len__() < halfOfPatients:
+        randNumber = random.randint(0, patients.__len__()-1)
+        if randNumber == 569:
+            print("lol")
+        if randNumber not in drawnNumbers:
+            teachingSet.append(patients[randNumber])
+            drawnNumbers.append(randNumber)
+
+    for i in range(patients.__len__()):
+        if i not in drawnNumbers:
+            testSet.append(patients[i])
+
+    return teachingSet, testSet
 
 def main():
     file_name = "../resources/wdbc.data"
     size_of_data = 32
-    patients = loadDataFromFile(file_name, size_of_data)
-    for patient in patients:
-        if patient.getCancerType() == "B":
-            print(patient.getInputValues()[0])
-
+    patients = file_reader.loadDataFromFile(file_name, size_of_data)
+    teachingSet, testSet = createTeachingAndTestSets(patients)
+    
 
 main()
