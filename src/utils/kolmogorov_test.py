@@ -1,4 +1,4 @@
-from src.types.ksType import ksType
+from src.models.ksType import ksType
 from scipy.stats import ks_2samp
 
 

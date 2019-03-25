@@ -20,8 +20,8 @@ def knn_alg(teachingSet, testSet, features):
 
     testDataFeatures, testDataLabelFeatures = prepareDataSet(testSet, features)
 
-#    testDataLabelFeatures.astype(int)
- #   trainDataLabelFeatures.astype(int)
+    # testDataLabelFeatures.astype(int)
+    # trainDataLabelFeatures.astype(int)
 
     classifier = neighbors.KNeighborsClassifier()
     classifier.fit(trainDataFeatures, trainDataLabelFeatures)

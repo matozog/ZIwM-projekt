@@ -1,4 +1,4 @@
-from src.types.patient import Patient
+from src.models.patient import Patient
 
 
 def loadDataFromFile(file_name, size_of_data):
