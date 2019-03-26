@@ -1,4 +1,5 @@
-from src.patient import Patient
+from src.types.patient import Patient
+
 
 def loadDataFromFile(file_name, size_of_data):
     patients = []
@@ -10,6 +11,7 @@ def loadDataFromFile(file_name, size_of_data):
             patient = Patient(formatted_row[0], formatted_row[1], formatted_row[2:size_of_data])
             patients.append(patient)
     return patients
+
 
 def readDataFromFile(file_name):
     file = open(file_name, "r")

@@ -1,4 +1,3 @@
-
 class Patient:
     id = 0
     cancer_type = ''

@@ -1,4 +1,3 @@
-
 class ksType:
     __statistic = 0
     __pvalue = 0
