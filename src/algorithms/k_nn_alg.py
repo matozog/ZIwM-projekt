@@ -15,7 +15,7 @@ def prepareDataSet(dataSet, features):
     return finalDataSet, finalLabelSet
 
 
-def knn_alg(teachingSet, testSet, features):
+def knn_alg(teachingSet, testSet, features, kValue, distanceMetrics, normalization):
     trainDataFeatures, trainDataLabelFeatures = prepareDataSet(teachingSet, features)
 
     testDataFeatures, testDataLabelFeatures = prepareDataSet(testSet, features)
@@ -23,10 +23,9 @@ def knn_alg(teachingSet, testSet, features):
     # testDataLabelFeatures.astype(int)
     # trainDataLabelFeatures.astype(int)
 
-    classifier = neighbors.KNeighborsClassifier()
+    classifier = neighbors.KNeighborsClassifier(n_neighbors=kValue, metric=distanceMetrics)
     classifier.fit(trainDataFeatures, trainDataLabelFeatures)
     predictions = classifier.predict(testDataFeatures)
     score = accuracy_score(testDataLabelFeatures, predictions)
-    # print(score)
 
     return score

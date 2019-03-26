@@ -46,6 +46,8 @@ def main():
     amountOfFeatures = 10
     patients = file_reader.loadDataFromFile(file_name, size_of_data)
     teachingSet, testSet = createTeachingAndTestSets(patients)
+    distanceMetrics = ['euclidean', 'manhattan']
+    normalization = False
 
     dataSet = createDataStructure(patients, amountOfFeatures)
 
@@ -55,8 +57,11 @@ def main():
     #         print("{} ({}, {})".format(asdf.getParamID(), asdf.geStatistic(), asdf.getPValue()))
 
     features = [9, 8, 4]
-    score = knn_alg(teachingSet, testSet, features)
+    score = knn_alg(teachingSet, testSet, features, 5, distanceMetrics[0], normalization)
+    score1 = knn_alg(teachingSet, testSet, features, 10, distanceMetrics[1], normalization)
+
     print(score)
+    print(score1)
 
 
 main()
