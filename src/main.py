@@ -1,8 +1,7 @@
-from src.utils import file_reader
+from src.utils import file_reader, createDataStructure
 import random
 from src.algorithms import knn_alg, nm_alg
 from src.utils import kolmogorovTest
-import pprint
 
 
 def createTeachingAndTestSets(patients):
@@ -24,22 +23,6 @@ def createTeachingAndTestSets(patients):
     return teachingSet, testSet
 
 
-def createDataStructure(patients, amountOfFeatures):
-    dataSet = {}
-    dataSet["M"] = {}
-    dataSet["B"] = {}
-
-    for x in range(0, amountOfFeatures):
-        dataSet["B"][x] = []
-        dataSet["M"][x] = []
-
-    for patient in patients:
-        for x in range(0, amountOfFeatures):
-            val = patient.getInputValues()[x]
-            dataSet[patient.getCancerType()][x].append(val)
-    return dataSet
-
-
 def main():
     file_name = "../resources/wdbc.data"
     size_of_data = 32
@@ -58,10 +41,12 @@ def main():
 
     features = [9, 8, 4]
     accuracy_knn_alg = knn_alg(teachingSet, testSet, features, 5, distanceMetrics[0], normalization)
-    accuracy_nm_alg = nm_alg(teachingSet, testSet, features, distanceMetrics[1], normalization)
+    accuracy_nm_alg = nm_alg(teachingSet, testSet, features, distanceMetrics[0], normalization)
+    accuracy_nm_alg1 = nm_alg(teachingSet, testSet, features, distanceMetrics[1], normalization)
 
-    print(accuracy_nm_alg)
     print(accuracy_knn_alg)
+    print(accuracy_nm_alg)
+    print(accuracy_nm_alg1)
 
 
 main()
