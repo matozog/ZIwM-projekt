@@ -1,6 +1,6 @@
 from src.utils import file_reader
 import random
-from src.algorithms import knn_alg
+from src.algorithms import knn_alg, nm_alg
 from src.utils import kolmogorovTest
 import pprint
 
@@ -57,11 +57,11 @@ def main():
     #         print("{} ({}, {})".format(asdf.getParamID(), asdf.geStatistic(), asdf.getPValue()))
 
     features = [9, 8, 4]
-    score = knn_alg(teachingSet, testSet, features, 5, distanceMetrics[0], normalization)
-    score1 = knn_alg(teachingSet, testSet, features, 10, distanceMetrics[1], normalization)
+    accuracy_knn_alg = knn_alg(teachingSet, testSet, features, 5, distanceMetrics[0], normalization)
+    accuracy_nm_alg = nm_alg(teachingSet, testSet, features, distanceMetrics[1], normalization)
 
-    print(score)
-    print(score1)
+    print(accuracy_nm_alg)
+    print(accuracy_knn_alg)
 
 
 main()

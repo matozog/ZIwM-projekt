@@ -1,18 +1,6 @@
 from sklearn import neighbors
 from sklearn.metrics import accuracy_score
-
-
-def prepareDataSet(dataSet, features):
-    finalDataSet = []
-    finalLabelSet = []
-
-    for patient in dataSet:
-        featureSet = []
-        finalLabelSet.append(patient.getCancerType())
-        for x in features:
-            featureSet.append(patient.getInputValues()[x])
-        finalDataSet.append(featureSet)
-    return finalDataSet, finalLabelSet
+from src.utils.data_structure import prepareDataSet
 
 
 def knn_alg(teachingSet, testSet, features, kValue, distanceMetrics, normalization):
