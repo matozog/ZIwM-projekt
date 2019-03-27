@@ -39,12 +39,16 @@ def main():
     # for asdf in ksData:
     #         print("{} ({}, {})".format(asdf.getParamID(), asdf.geStatistic(), asdf.getPValue()))
 
+    # print(sklearn.preprocessing.normalize(vector, norm="l1"))
+
     features = [9, 8, 4]
     accuracy_knn_alg = knn_alg(teachingSet, testSet, features, 5, distanceMetrics[0], normalization)
+    accuracy_knn_alg1 = knn_alg(teachingSet, testSet, features, 5, distanceMetrics[0], True)
     accuracy_nm_alg = nm_alg(teachingSet, testSet, features, distanceMetrics[0], normalization)
-    accuracy_nm_alg1 = nm_alg(teachingSet, testSet, features, distanceMetrics[1], normalization)
+    accuracy_nm_alg1 = nm_alg(teachingSet, testSet, features, distanceMetrics[0], True)
 
     print(accuracy_knn_alg)
+    print(accuracy_knn_alg1)
     print(accuracy_nm_alg)
     print(accuracy_nm_alg1)
 

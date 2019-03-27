@@ -52,10 +52,17 @@ def assignToClass(testDataFeatures, nearestMeanForBClass, nearestMeanForMClass, 
     return results
 
 
+# def normalizingData(trainDataFeatures):
+#     pprint.pprint(trainDataFeatures)
+#     for patient in range(0,trainDataFeatures.__len__()):
+#         tra = numpy.linalg.norm(patientFeatures)
+#     pprint.pprint(trainDataFeatures)
+
+
 def nm_alg(teachingSet, testSet, features, distanceMetrics, normalization):
 
-    trainDataFeatures, trainDataLabelFeatures = prepareDataSet(teachingSet, features)
-    testDataFeatures, testDataLabelFeatures = prepareDataSet(testSet, features)
+    trainDataFeatures, trainDataLabelFeatures = prepareDataSet(teachingSet, features, normalization)
+    testDataFeatures, testDataLabelFeatures = prepareDataSet(testSet, features, normalization)
 
     meanForMClass, meanForBClass = calculateNearestMean(trainDataFeatures, trainDataLabelFeatures, features.__len__())
 

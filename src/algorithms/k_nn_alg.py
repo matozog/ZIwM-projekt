@@ -4,9 +4,8 @@ from src.utils.data_structure import prepareDataSet
 
 
 def knn_alg(teachingSet, testSet, features, kValue, distanceMetrics, normalization):
-    trainDataFeatures, trainDataLabelFeatures = prepareDataSet(teachingSet, features)
-
-    testDataFeatures, testDataLabelFeatures = prepareDataSet(testSet, features)
+    trainDataFeatures, trainDataLabelFeatures = prepareDataSet(teachingSet, features, normalization)
+    testDataFeatures, testDataLabelFeatures = prepareDataSet(testSet, features, normalization)
 
     # testDataLabelFeatures.astype(int)
     # trainDataLabelFeatures.astype(int)
