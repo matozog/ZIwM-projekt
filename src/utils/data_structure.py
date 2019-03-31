@@ -1,3 +1,5 @@
+import pprint
+
 import scipy
 
 
@@ -9,9 +11,17 @@ def prepareDataSet(dataSet, features, normalization):
         finalLabelSet.append(patient.getCancerType())
         for x in features:
             featureSet.append(patient.getInputValues()[x])
+            # if patient.getID() == '925236' and normalization:
+            #     print("something")
         if(normalization):
             float_featureSet = [float(i) for i in featureSet]
-            normalFeatureSet = [number/scipy.linalg.norm(float_featureSet) for number in float_featureSet]
+            # normalFeatureSet = [number/scipy.linalg.norm(float_featureSet) for number in float_featureSet]
+            normalFeatureSet = []
+            for number in float_featureSet:
+                if scipy.linalg.norm(float_featureSet) != 0.0:
+                    normalFeatureSet.append(number / scipy.linalg.norm(float_featureSet))
+                else:
+                    normalFeatureSet.append(0)
             finalDataSet.append(normalFeatureSet)
         else:
             finalDataSet.append(featureSet)

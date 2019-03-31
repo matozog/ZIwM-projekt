@@ -6,8 +6,9 @@ def kolmogorovTest(dataSet, amountOfFeatures):
     ksData = []
     for feature in range(0, amountOfFeatures):
         statistic, pvalue = ks_2samp(dataSet["M"][feature], dataSet["B"][feature])
-        ksData.append(ksType(feature, statistic, pvalue))
+        if pvalue < 0.002:
+            ksData.append(ksType(feature, statistic, pvalue))
 
-    ksData.sort(key=lambda val: val.geStatistic())
+    ksData.sort(key=lambda val: val.geStatistic(), reverse=True)
 
     return ksData
