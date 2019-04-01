@@ -108,4 +108,8 @@ venv.bak/
 src/results/*
 nm_alg.txt
 
-.pdf
+*.pdf
+*.aux
+*.dvi
+*.gz
+*.toc
