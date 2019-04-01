@@ -106,3 +106,4 @@ venv.bak/
 # pycharm
 .idea/
 src/results/*
+nm_alg.txt

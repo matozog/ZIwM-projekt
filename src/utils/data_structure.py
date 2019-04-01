@@ -1,6 +1,7 @@
-import pprint
-
 import scipy
+
+#   finalDataSet = [[parameters patient1], [ param patient2], ....]
+#   finalDataLabelSet = [[result patient1], [result patient2], ...]
 
 
 def prepareDataSet(dataSet, features, normalization):
@@ -11,22 +12,25 @@ def prepareDataSet(dataSet, features, normalization):
         finalLabelSet.append(patient.getCancerType())
         for x in features:
             featureSet.append(patient.getInputValues()[x])
-            # if patient.getID() == '925236' and normalization:
-            #     print("something")
-        if(normalization):
-            float_featureSet = [float(i) for i in featureSet]
-            # normalFeatureSet = [number/scipy.linalg.norm(float_featureSet) for number in float_featureSet]
-            normalFeatureSet = []
-            for number in float_featureSet:
-                if scipy.linalg.norm(float_featureSet) != 0.0:
-                    normalFeatureSet.append(number / scipy.linalg.norm(float_featureSet))
-                else:
-                    normalFeatureSet.append(0)
+        float_featureSet = [float(i) for i in featureSet]
+        if normalization:
+            normalFeatureSet = normalizeVector(float_featureSet)
             finalDataSet.append(normalFeatureSet)
         else:
-            finalDataSet.append(featureSet)
+            finalDataSet.append(float_featureSet)
 
     return finalDataSet, finalLabelSet
+
+
+def normalizeVector(vector):
+    normalFeatureSet = []
+    vectorLength = scipy.linalg.norm(vector)
+    for number in vector:
+        if vectorLength != 0.0:
+            normalFeatureSet.append(number / vectorLength)
+        else:
+            normalFeatureSet.append(0)
+    return normalFeatureSet
 
 
 def createDataStructure(patients, amountOfFeatures):
@@ -42,4 +46,5 @@ def createDataStructure(patients, amountOfFeatures):
         for x in range(0, amountOfFeatures):
             val = patient.getInputValues()[x]
             dataSet[patient.getCancerType()][x].append(val)
+
     return dataSet
