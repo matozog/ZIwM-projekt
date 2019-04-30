@@ -113,6 +113,9 @@ Zbiór uczący i testujący będą wyglądały następująco:
 \centerline{\textbf{Algorytm najbliższej średniej}}
 \newline\newline
 \indent Algorytm polega na wyliczeniu obiektu centralnego (wykorzystując średnią arytmetyczną) dla każdej klasy. Jest on uśrednionym wektorem uwzględniającym wszystkie próbki ze zbioru uczącego należące do danej klasy. Na jego podstawie liczona będzie odległość do obiektu testowego, na którym przeprowadzana jest klasyfikacja. Obiekt ten opisany jest za pomocą poniższego wzoru.
+\begin{center}
+$ \sum{x}$
+\end{center}
 \begin{figure}[H]
 	\centering
 		\includegraphics[scale=1]{images/nm_average.png}
@@ -185,15 +188,71 @@ copen kappa -
 %					Część piąta
 %---------------------------------------------------------
 \section{Wyniki}
-\newpage
-parametrów porównane zostały metryki odległości. Na koniec porównano wyniki osiągane z normalizacją wektora cech poszczególnych pacjentów oraz bez normalizacji. Osiągnięte rezultaty oraz wnioski z nich wynikające przedstawiono w dalszej części pracy.parametrów porównane zostały metryki odległości. Na koniec porównano wyniki osiągane z normalizacją wektora cech poszczególnych pacjentów oraz bez normalizacji. Osiągnięte rezultaty oraz wnioski z nich wynikające przedstawiono w dalszej części pracy.parametrów porównane zostały metryki odległości. Na koniec porównano wyniki osiągane z normalizacją wektora cech poszczególnych pacjentów oraz bez normalizacji. Osiągnięte rezultaty oraz wnioski z nich wynikające przedstawiono w dalszej części pracy.
+\newpage 
+
+% Porownanie metryk 
 \begin{figure}[H]
 	\centering
-		\includegraphics[scale=0.7]{images/metrics/test.png}
+		\includegraphics[scale=0.66]{images/metrics/9nn_euklides_norm.png}
 	\caption{Przykład działania algorytmu k najbliższych sąsiadów [1]}
 \end{figure}
 
 
+\begin{figure}[H]
+	\centering
+		\includegraphics[scale=0.66]{images/metrics/9nn_euklides_beznorm.png}
+	\caption{Przykład działania algorytmu k najbliższych sąsiadów [1]}
+\end{figure}
+
+\begin{figure}[H]
+	\centering
+		\includegraphics[scale=0.66]{images/metrics/9nn_manhatan_norm.png}
+	\caption{Przykład działania algorytmu k najbliższych sąsiadów [1]}
+\end{figure}
+
+
+\begin{figure}[H]
+	\centering
+		\includegraphics[scale=0.66]{images/metrics/9nn_manhatan_beznorm.png}
+	\caption{Przykład działania algorytmu k najbliższych sąsiadów [1]}
+\end{figure}
+
+%Porownanie algorytmów
+
+\begin{figure}[H]
+	\centering
+		\includegraphics[scale=0.66]{images/algorithms/euklides_norm.png}
+	\caption{Przykład działania algorytmu k najbliższych sąsiadów [1]}
+\end{figure}
+
+\begin{figure}[H]
+	\centering
+		\includegraphics[scale=0.66]{images/algorithms/manhatan_norm.png}
+	\caption{Przykład działania algorytmu k najbliższych sąsiadów [1]}
+\end{figure}
+
+
+\begin{figure}[H]
+	\centering
+		\includegraphics[scale=0.66]{images/algorithms/euklides_beznorm.png}
+	\caption{Przykład działania algorytmu k najbliższych sąsiadów [1]}
+\end{figure}
+
+
+\begin{figure}[H]
+	\centering
+		\includegraphics[scale=0.66]{images/algorithms/manhatan_beznorm.png}
+	\caption{Przykład działania algorytmu k najbliższych sąsiadów [1]}
+\end{figure}
+
+
+% Porównanie metryk odległościowych
+
+\begin{figure}[H]
+	\centering
+		\includegraphics[scale=0.66]{images/distance_metrics/distance_metrics.png}
+	\caption{Przykład działania algorytmu k najbliższych sąsiadów [1]}
+\end{figure}
 
 %---------------------------------------------------------
 %					Część szósta
