@@ -8,11 +8,9 @@
 \usepackage{caption}
 \usepackage{indentfirst} 
 
-%zmienić napis rysunek na tabela w tabelach
-%dodać ref-y
-%dodać srakowatą table bezpośrednio po 5.Wynki
-%dodać "z normalizacją"
-%dodac bibliografie do rysunkow
+
+%zmienić opis rysunku 2: wzorek
+%zmienić copena na cohena
 
 \linespread{1.3}
 \begin{document}
@@ -65,21 +63,22 @@ Tematem naszego projektu jest wspomniane w tytule, komputerowe wspomaganie diagn
 
 
 \subsection{Analiza materiału diagnostycznego}
-\indent Do badania przystąpiło 569 kobiet u ,których został zdiagnozowany rak piersi. Każda z nich została opisana za pomocą 33 wartości. Pierwszą jest numer identyfikacyjny. Druga składa się z dwóch liter M lub B i oznacza przynależność do danej klasy.  Grupa z rakiem łagodnym (357 kobiet) oznaczona jest literą B, natomiast z rakiem złośliwym (212 kobiet) literą M. Rozkład ilości pacjentów przynależnych do danych klas przedstawiony został na rysunku 1 (malignant - nowotwór złośliwy, benign - nowotwór łagodny). Pozostałe wartości wyznaczane były na podstawie wyglądu jądra komórkowego każdej z pacjentek.
+\indent Do badania przystąpiło 569 kobiet u ,których został zdiagnozowany rak piersi. Każda z nich została opisana za pomocą 33 wartości. Pierwszą jest numer identyfikacyjny. Druga składa się z dwóch liter M lub B i oznacza przynależność do danej klasy.  Grupa z rakiem łagodnym (357 kobiet) oznaczona jest literą B, natomiast z rakiem złośliwym (212 kobiet) literą M. Rozkład ilości pacjentów przynależnych do danych klas przedstawiony został na rysunku \ref{przynaleznosc_pacjentek} (malignant - nowotwór złośliwy, benign - nowotwór łagodny). Pozostałe wartości wyznaczane były na podstawie wyglądu jądra komórkowego każdej z pacjentek.
 \newline
 
 \begin{figure}[H]
 	\centering
 		\includegraphics[scale=0.6]{images/pie_chart.png}
 	\caption{Przynależność pacjentek do wyznaczonych klas}
+	\label{przynaleznosc_pacjentek}
 \end{figure}
 
-\indent U każdej z kobiet zostało wyróżnionych 10 cech głównych (tabela 2) oraz 20 dodatkowych opisujących błąd standardowy oraz najgorszą uzyskaną wartość dla każdej z nich. Razem wyznaczono 30 parametrów. 
+\indent U każdej z kobiet zostało wyróżnionych 10 cech głównych (tabela \ref{cechy}) oraz 20 dodatkowych opisujących błąd standardowy oraz najgorszą uzyskaną wartość dla każdej z nich. Razem wyznaczono 30 parametrów. 
 \newline
 
 \begin{table}[H]
 \captionof{table}{Cechy jądra komórkowego wykorzystywane w procesie rozpoznawania} 
-
+\label{cechy}
 	\begin{tabular}{|p{0.2\linewidth}|p{0.74\linewidth}|}%{|l|l|}
 	\hline\centering
 	Numer cechy 	& Opis 				\\ \hline\centering
@@ -130,7 +129,7 @@ Aby lepiej zobrazować działanie algorytmu przedstawiony zostanie prosty przyk�
 \begin{figure}[H]
 	\centering
 		\includegraphics[scale=0.7]{images/nm_alg_example.png}
-	\caption{Przykład działania algorytmu k najbliższych sąsiadów [1]}
+	\caption{Przykład działania algorytmu k najbliższych sąsiadów \cite{bib1}}
 \end{figure}
 
  
@@ -194,7 +193,11 @@ copen kappa -
 %---------------------------------------------------------
 \section{Wyniki}
 \newpage 
-
+\begin{figure}[H]
+	\centering
+	\captionof{table}{Wyniki pomiarowe wykonane na podstawie zaimplementowanych algorytmów}
+		\includegraphics[scale=0.75]{images/ogolna_tabela.png}
+\end{figure}
 
 % Porownanie metryk 
 
@@ -203,13 +206,14 @@ copen kappa -
 \subsubsection{Euklides}
 \begin{figure}[H]
 	\centering
+	\captionof{table}{Porównanie metryk dla algorytmu 9 najbliższych sąsiadów z normalizacją wektorów}
 		\includegraphics[scale=0.9]{images/metrics/9nn_euklides_norm_tab.png}
-	\caption{Porównanie metryk dla algorytmu 9 najbliższych sąsiadów z normalizacją wektorów}
 \end{figure}
 \begin{figure}[H]
 	\centering
+	\captionof{table}{Porównanie metryk dla algorytmu 9 najbliższych sąsiadów bez normalizacji wektorów}
 		\includegraphics[scale=0.9]{images/metrics/9nn_euklides_beznorm_tab.png}
-	\caption{Porównanie metryk dla algorytmu 9 najbliższych sąsiadów bez normalizacji wektorów}
+	
 \end{figure}
 
 \begin{figure}[H]
@@ -228,13 +232,15 @@ copen kappa -
 %-------------------------MANHATAN--------------------------
 \begin{figure}[H]
 	\centering
+	\captionof{table}{Porównanie metryk dla algorytmu 9 najbliższych sąsiadów z normalizacją wektorów}
 		\includegraphics[scale=0.9]{images/metrics/9nn_manhatan_norm_tab.png}
-	\caption{Porównanie metryk dla algorytmu 9 najbliższych sąsiadów z normalizacją wektorów}
+	
 \end{figure}
 \begin{figure}[H]
 	\centering
+	\captionof{table}{Porównanie metryk dla algorytmu 9 najbliższych sąsiadów bez normalizacji wektorów}
 		\includegraphics[scale=0.9]{images/metrics/9nn_manhatan_beznorm_tab.png}
-	\caption{Porównanie metryk dla algorytmu 9 najbliższych sąsiadów bez normalizacji wektorów}
+	
 \end{figure}
 \begin{figure}[H]
 	\centering
@@ -252,32 +258,35 @@ copen kappa -
 
 \begin{figure}[H]
 	\centering
+	\captionof{table}{Porównanie algorytmów dla metryki odległościowej \textit{Euklides} z normalizacją wektorów}
 		\includegraphics[scale=0.8]{images/algorithms/euklides_norm_tab.png}
-	\caption{Porównanie algorytmów dla metryki odległościowej \textit{Euklides}}
+	
 \end{figure}
 
 \begin{figure}[H]
 	\centering
 		\includegraphics[scale=0.66]{images/algorithms/euklides_norm.png}
-	\caption{Porównanie algorytmów dla metryki odległościowej \textit{Euklides}}
+	\caption{Porównanie algorytmów dla metryki odległościowej \textit{Euklides} z normalizacją wektorów}
 \end{figure}
 
 \begin{figure}[H]
 	\centering
+	\captionof{table}{Porównanie algorytmów dla metryki odległościowej \textit{Manhatan} z normalizacją wektorów}
 		\includegraphics[scale=0.8]{images/algorithms/manhatan_norm_tab.png}
-	\caption{Porównanie algorytmów dla metryki odległościowej \textit{Manhatan}}
+	
 \end{figure}
 
 \begin{figure}[H]
 	\centering
 		\includegraphics[scale=0.66]{images/algorithms/manhatan_norm.png}
-	\caption{Porównanie algorytmów dla metryki odległościowej \textit{Manhatan}}
+	\caption{Porównanie algorytmów dla metryki odległościowej \textit{Manhatan} z normalizacją wektorów}
 \end{figure}
 
 \begin{figure}[H]
 	\centering
+	\captionof{table}{Porównanie algorytmów dla metryki odległościowej \textit{Euklides} bez normalizacji}
 		\includegraphics[scale=0.8]{images/algorithms/euklides_beznorm_tab.png}
-	\caption{Porównanie algorytmów dla metryki odległościowej \textit{Euklides} bez normalizacji}
+	
 \end{figure}
 \begin{figure}[H]
 	\centering
@@ -287,8 +296,9 @@ copen kappa -
 
 \begin{figure}[H]
 	\centering
+	\captionof{table}{Porównanie algorytmów dla metryki odległościowej \textit{Manhatan} bez normalizacji}
 		\includegraphics[scale=0.8]{images/algorithms/manhatan_beznorm_tab.png}
-	\caption{Porównanie algorytmów dla metryki odległościowej \textit{Manhatan} bez normalizacji}
+	
 \end{figure}
 \begin{figure}[H]
 	\centering
@@ -301,8 +311,9 @@ copen kappa -
 \subsection{Porównanie metryk odległościowych}
 \begin{figure}[H]
 	\centering
+	\captionof{table}{Porównanie metryk odległościowych i reprezentacji wektorów cech}
 		\includegraphics[scale=0.77]{images/distance_metrics/distance_metrics_tab.png}
-	\caption{Porównanie metryk odległościowych i reprezentacji wektorów cech}
+	
 \end{figure}
 \begin{figure}[H]
 	\centering
@@ -317,6 +328,25 @@ copen kappa -
 \section{Dyskusja wyników i wnioski wynikające z badań.}
 
 Porównanie metryk wyszło super, algorytmy śmigały aż miło. Raka diagnozowaliśmy w 90\% a w kolejnych 10\% przepisywaliśmy pacjentkom dodatkowe prywatne badanie cyckuf
+
+
+
+\newpage
+\renewcommand\refname{Bibliografia}
+\addcontentsline{toc}{section}{Bibliografia} %utworzenie w spisie treści pozycji Bibliografia
+\begin{thebibliography}{9}
+
+\bibitem{bib1}  https://www.sieciowy.com.pl/product/WAP121-E-K9-G5-1466398
+
+[Dostęp: 26.11.2018]
+\bibitem{bib2}  https://www.sieciowy.com.pl/product/WAP121-E-K9-G5-1466398
+
+[Dostęp: 26.11.2018]
+\bibitem{bib3}  https://www.sieciowy.com.pl/product/WAP121-E-K9-G5-1466398
+
+[Dostęp: 26.11.2018]
+
+\end{thebibliography}
 
 \end{document}
 
