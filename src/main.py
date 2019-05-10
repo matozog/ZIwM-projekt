@@ -91,57 +91,6 @@ def saveDataToFile(classificationResults):
                 avarageAndDeviation = str("{0:.3f}".format(mean(elements))) + "(" + str("{0:.3f}".format(std(elements))) + ")"
             result_writer.writerow(["Average(std): ", avarageAndDeviation])
 
-# def createResearchs(patients, algorithms, ksData, algParameters):
-#         for metric in algParameters.getMetrics():
-#             for disMetric in algParameters.getDistanceMetrics():
-#                 for norm in algParameters.getNormalization():
-#                     results = {}
-#                     for i in range(0, ksData.__len__()):
-#                         features = []
-#                         for param in range(i+1):
-#                             features.append(ksData[param].getParamID())
-#                         # teachingSet, testSet = createTeachingAndTestSets(patients)
-#                         results[i] = twoFoldCrossValidation(patients, features, disMetric, norm, algorithms, metric)
-#                     saveDataToFile(results, algorithms, disMetric, norm, metric)
-#
-#
-# def twoFoldCrossValidation(patients, features, disMetric, norm, algorithms, metric):
-#     classificationResults = []
-#     for algorithm in algorithms:
-#         tmp = []
-#         for i in range(5):
-#             teachingSet, testSet = createTeachingAndTestSets(patients)
-#             for j in range(2):
-#                 if algorithm.getType() == 'nm_alg':
-#                     tmp.append(eval(algorithm.getType())(teachingSet, testSet, features, disMetric, norm, metric))
-#                 else:
-#                     tmp.append(eval(algorithm.getType())(teachingSet, testSet, features, algorithm.getKValue(), disMetric, norm, metric))
-#                 var = testSet
-#                 testSet = teachingSet
-#                 teachingSet = var
-#         classificationResults.append(ClassificationResult(algorithm, mean(tmp), std(tmp)))
-#
-#     return classificationResults
-
-
-# def saveDataToFile(results, algorithms, disMetric, norm, metric):
-#     with open("results/results.csv", mode='a+', newline='') as result_file:
-#         result_writer = csv.writer(result_file, delimiter=',', quotechar='"', quoting=csv.QUOTE_MINIMAL)
-#         for i in range(0, algorithms.__len__()):
-#             result_writer.writerow([metric + "_" + disMetric + str(norm) + algorithms[i].getName()])
-#             elements = []
-#             for j in range(0, results.__len__()):
-#                 elements.append(results[j][i].getAccuracy())
-#                 result_writer.writerow([j, "{0:.3f}".format(results[j][i].getAccuracy()), "{0:.3f}".format(results[j][i].getDeviation())])
-#             avarageAndDeviation = str("{0:.3f}".format(mean(elements))) + "(" + str("{0:.3f}".format(std(elements))) + ")"
-#             result_writer.writerow(["Average(std): ", avarageAndDeviation])
-
-    # for alg in range(algorithms.__len__()):
-    #     filename = str('results/' + algorithms[alg].getName() + '_' + disMetric + '_' + str(norm)+'.csv')
-    #     with open(filename, mode='a+', newline='') as result_file:
-    #         result_writer = csv.writer(result_file, delimiter=',', quotechar='"', quoting=csv.QUOTE_MINIMAL)
-    #         result_writer.writerow([amountOfFeatures, results[alg]])
-
 
 #   dataSet - {B/M: { number of parameter: [] }
     # odchylenie
