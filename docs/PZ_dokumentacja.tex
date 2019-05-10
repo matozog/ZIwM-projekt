@@ -58,12 +58,12 @@ mgr inż. Jakub Klikowski
 \section{Charakterystyka analizowanego problemu}
 Tematem naszego projektu jest wspomniane w tytule, komputerowe wspomaganie diagnozowania nowotworów piersi przy pomocy algorytmów minimalno-odległościowych. Na podstawie empirycznego materiału diagnostycznego należało zbadać poprawność diagnoz losowo wybranych pacjentów dla zaimplementowanych mechanizmów rozpoznawania.
 \newline
-\indent Pojedyncza diagnoza przyporządkowuje pacjentkę do jednej z wyodrębnionych klas. Przeprowadzana jest na podstawie pewnych cech przypisywanych do danego osobnika. Poszczególne klasy posiadają charakterystyczne wartości wyróżnionych parametrów. W procesie rozpoznawania każdy z parametrów pomaga określić przynależność do danej kategorii. Wartości niektórych z nich mogą jednoznacznie determinować klasę danego pacjenta, natomiast inne tylko ją zasugerować. W związku z tym zostały one posortowane malejąco, zgodnie z ich znaczeniem w procesie rozpoznawania. 
-\newline \indent Dla ułatwienia zrozumienia problemu i dokonania jego dogłębnej analizy, poniżej przedstawimy krótką analizę danych poddawanych późniejszym badaniom.
+\indent Pojedyncza diagnoza przyporządkowuje pacjentkę do jednej z wyodrębnionych klas. Przeprowadzana jest na podstawie pewnych cech, które ją charakteryzują (parametry badań). Poszczególne klasy posiadają charakterystyczne wartości wyróżnionych właściwości. W procesie rozpoznawania każdy z parametrów pomaga określić przynależność do danego zbioru. Wartości niektórych z nich mogą jednoznacznie determinować klasę danego pacjenta, natomiast inne tylko ją zasugerować. W związku z tym przeprowadzono ranking cech, który posortował poszczególne parametry, zgodnie z ich znaczeniem w procesie rozpoznawania. 
+\newline \indent Dla ułatwienia zrozumienia problemu i dokonania jego dokładniejszej analizy, poniżej przedstawiono krótką analizę danych poddawanych późniejszym procesom rozpoznawania.
 
 
 \subsection{Analiza materiału diagnostycznego}
-\indent Do badania przystąpiło 569 kobiet u ,których został zdiagnozowany rak piersi. Każda z nich została opisana za pomocą 33 wartości. Pierwszą jest numer identyfikacyjny. Druga składa się z dwóch liter M lub B i oznacza przynależność do danej klasy.  Grupa z rakiem łagodnym (357 kobiet) oznaczona jest literą B, natomiast z rakiem złośliwym (212 kobiet) literą M. Rozkład ilości pacjentów przynależnych do danych klas przedstawiony został na rysunku \ref{przynaleznosc_pacjentek} (malignant - nowotwór złośliwy, benign - nowotwór łagodny). Pozostałe wartości wyznaczane były na podstawie wyglądu jądra komórkowego każdej z pacjentek.
+\indent Do badania przystąpiło 569 kobiet, u których został zdiagnozowany rak piersi. Każda z nich została opisana za pomocą 32 wartości. Pierwsza jest numerem identyfikacyjnym, druga składa się z dwóch liter M lub B i oznacza przynależność do danej klasy.  Grupa z rakiem łagodnym (357 kobiet) oznaczona jest literą B, natomiast z rakiem złośliwym (212 kobiet) literą M. Rozkład ilości pacjentów przynależnych do danych klas przedstawiony został na rysunku \ref{przynaleznosc_pacjentek} (malignant - nowotwór złośliwy, benign - nowotwór łagodny). Pozostałe wartości, w liczbie 30, wyznaczane były na podstawie wyglądu jądra komórkowego każdej z pacjentek.
 \newline
 
 \begin{figure}[H]
@@ -73,7 +73,7 @@ Tematem naszego projektu jest wspomniane w tytule, komputerowe wspomaganie diagn
 	\label{przynaleznosc_pacjentek}
 \end{figure}
 
-\indent U każdej z kobiet zostało wyróżnionych 10 cech głównych (tabela \ref{cechy}) oraz 20 dodatkowych opisujących błąd standardowy oraz najgorszą uzyskaną wartość dla każdej z nich. Razem wyznaczono 30 parametrów. 
+\indent U każdej z kobiet zostało wyróżnionych 10 cech głównych (tabela \ref{cechy}) oraz 20 dodatkowych opisujących błąd standardowy oraz najgorszą uzyskaną wartość dla każdej z nich. Co razem daje 30 cech. 
 \newline
 
 \begin{table}[H]
@@ -94,7 +94,7 @@ Tematem naszego projektu jest wspomniane w tytule, komputerowe wspomaganie diagn
 	10	& Wymiar fraktalny ("przybliżenie linii brzegowej" - 1) \\ \hline
 	\end{tabular}
 \end{table}
-\indent Podsumowując analizę przedstawionego problemu rozpoznawania, pacjentów będziemy dzielić na dwie klasy. Więcej informacji empirycznej posiadamy na temat klasy reprezentującej nowotwór łagodny, co jest spowodowane większą liczbą kobiet w jego gronie. Każda z pacjentek posiada 30 cech, które przedstawione są za pomocą wielowartościowych liczb rzeczywistych. Pojedyncza cecha z pewną dokładnością wyznacza klasyfikację do danej klasy.W celu uzyskania dokładniejszych wyników w procesie rozpoznawania będziemy przeprowadzali ranking cech. Wykorzystuje on metody selekcji, które porządkują parametry pacjentów rozpoczynając od cech o największym znaczeniu. Sam proces rozpoznawania opierać się będzie na implementacji algorytmów minimalno-odległościowych tj. NM (nearest mean), KNN (k-nearest neighbours).
+\indent Podsumowując analizę przedstawionego problemu rozpoznawania, pacjentów z grupy testowej będziemy przyporządkowywać do jednej z dwóch klas. Więcej informacji empirycznej posiadamy na temat klasy reprezentującej nowotwór łagodny, co jest spowodowane większą liczbą kobiet w jego gronie. Każda z pacjentek posiada 30 cech, które przedstawione są za pomocą wielowartościowych liczb rzeczywistych. Pojedyncza cecha z pewną dokładnością wyznacza klasyfikację do danej grupy. W celu uzyskania dokładniejszych wyników w procesie rozpoznawania będziemy przeprowadzali ranking cech, wykorzystując kryterium Kołmogorova-Smirnova, które porządkuje parametry pacjentów rozpoczynając od cech o największym znaczeniu. Sam proces rozpoznawania opierać się będzie na implementacji klasyfikatorów minimalno-odległościowych tj. NM (nearest mean) oraz KNN (k-nearest neighbours).
 
 %---------------------------------------------------------
 %					Część druga
@@ -103,19 +103,18 @@ Tematem naszego projektu jest wspomniane w tytule, komputerowe wspomaganie diagn
 
 \indent W procesie klasyfikacji pacjentów do poszczególnych klas zostaną wykorzystane algorytmy: najbliższej średniej oraz k-najbliższych sąsiadów. W przypadku drugiego algorytmu jako parametr k (ilość sąsiadów) zostaną przyjęte następujące wartości: 1, 5 oraz 9. Pacjentów będziemy dzielić na 2 grupy. Zbiór uczący będzie określał obiekty z zdiagnozowaną klasą. W zbiorze testowym natomiast będą znajdowali się pacjenci poddawani klasyfikacji na podstawie przetworzonych danych z grupy uczącej. Struktura danych w obu algorytmach jest identyczna. Każdy pacjent będzie określany za pomocą wektora cech tak jak to przedstawiono we wzorze poniżej.
 \begin{center}
-\[ x = (x_1, x_2, ... , x_n)\]
+\[ \vec{X} = (x_1, x_2, ... , x_n)\]
 \end{center}
 
 
 Każdy zbiór będzie składał się z m takich wektorów, gdzie m oznacza liczbę przypisanych do niego pacjentów.
-Zbiór uczący i testujący będą wyglądały następująco:
+Zbiory uczące i testujące będą wyglądały następująco:
 \begin{center}
-\[ (x_{11}, x_{12}, ... , x_{1n}), (x_{11}, ..., x_{12}, ... , x_{1n})\]
+\[ Z=(\vec{X_{1}}, \vec{X_{2}}, ... , \vec{X_{m}})\]
 \end{center}
 
-,gdzie w nawiasach okrągłych znajdują się dane poszczególnych pacjentów posiadających n cech, w naszym przypadku liczba ta wynosi 30.
 \subsection{Algorytm najbliższej średniej}
-\indent Algorytm polega na wyliczeniu obiektu centralnego (wykorzystując średnią arytmetyczną) dla każdej klasy. Jest on uśrednionym wektorem uwzględniającym wszystkie próbki ze zbioru uczącego należące do danej klasy. Na jego podstawie liczona będzie odległość do obiektu testowego, na którym przeprowadzana jest klasyfikacja. Obiekt ten opisany jest za pomocą poniższego wzoru.
+\indent Algorytm polega na wyliczeniu obiektu centralnego dla każdej klasy. Jest on uśrednionym wektorem uwzględniającym wszystkie próbki ze zbioru uczącego należące do danej klasy. Na jego podstawie liczona będzie odległość do obiektu testowego, na którym przeprowadzana jest klasyfikacja. Obiekt ten opisany jest za pomocą poniższego wzoru.
 \begin{center}
 $ \sum{x}$
 \end{center}
@@ -149,7 +148,7 @@ Aby lepiej zobrazować działanie algorytmu przedstawiony zostanie prosty przyk�
 %---------------------------------------------------------
 \section{Informacja o środowisku implementacyjnym}
 
-\indent Badania zostały przeprowadzone przy pomocy języka Python w wersji 3.6. Algorytmy zostały zaimplementowane z użyciem biblioteki sklearn wykorzystując metody KNeighborsClassifier oran NearestCentroid zwracające wybrany klasyfikator. Na jego podstawie trenowany był zbiór uczący przy pomocy metody fit, a następnie przy pomocy predict przyjmującej jako parametr zbiór testowy dokonywana była diagnoza. Otrzymane wartości klasyfikacji porównane były z rzeczywistym stanem badanego obiektu wykorzystując opisane w kolejnej części metryki klasyfikacji.
+\indent Badania zostały przeprowadzone przy pomocy języka Python w wersji 3.6. Do stworzenia rankingu cech przy użyciu kryterium Kołmogorova-Smirnova, dla każdego z parametru została użyta metoda ks2samp z biblioteki scipy, przyjmująca dwa wektory opisujące poszczególne klasy. Algorytmy natomiast zostały zaimplementowane z użyciem biblioteki sklearn wykorzystując metody KNeighborsClassifier oran NearestCentroid zwracające wybrany klasyfikator. Na jego podstawie trenowany był zbiór uczący przy pomocy metody fit, a następnie przy pomocy funkcji predict przyjmującej jako parametr zbiór testowy dokonywana była diagnoza. Otrzymane wartości klasyfikacji porównane były z rzeczywistym stanem badanego obiektu wykorzystując opisane w kolejnej części metryki klasyfikacji.
 
 
 %---------------------------------------------------------
