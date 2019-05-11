@@ -7,10 +7,13 @@
 \usepackage{float}
 \usepackage{caption}
 \usepackage{indentfirst} 
+\usepackage[table,xcdraw]{xcolor}
 
 
-%zmienić copena na cohena
-%biblio źle wyglada
+% zmienić copena na cohena i jeżeli jest capa ma byc cappa
+% biblio źle wyglada
+% poprawić te tabelki w macierzach konfuzji
+% 4 pierwsze rozdzialy sa gotowe, przeczytac i poprawic ewentualne bledy
 
 \linespread{1.3}
 \begin{document}
@@ -148,7 +151,7 @@ $ y=argmin_{l\in{Y}}||\vec{U_{l}}-\vec{T}|| $ \cite{bib1}
 %---------------------------------------------------------
 \section{Informacja o środowisku implementacyjnym}
 
-\indent Badania zostały przeprowadzone przy pomocy języka Python w wersji 3.6. Do stworzenia rankingu cech przy użyciu kryterium Kołmogorova-Smirnova, dla każdego z parametru została użyta metoda ks2samp z biblioteki scipy, przyjmująca dwa wektory opisujące poszczególne klasy. Algorytmy natomiast zostały zaimplementowane z użyciem biblioteki sklearn wykorzystując metody KNeighborsClassifier oraz NearestCentroid zwracające wybrany klasyfikator. Na jego podstawie trenowany był zbiór uczący przy pomocy metody fit, a następnie przy pomocy funkcji predict przyjmującej jako parametr zbiór testowy dokonywana była diagnoza. Otrzymane wartości klasyfikacji porównano z rzeczywistym stanem badanego obiektu wykorzystując opisane w kolejnej części metryki klasyfikacji.
+\indent Badania zostały przeprowadzone przy pomocy języka Python w wersji 3.6. Do stworzenia rankingu cech przy użyciu kryterium Kołmogorova-Smirnova, dla każdego z parametru została użyta metoda ks\_2samp z biblioteki scipy, przyjmująca dwa wektory opisujące poszczególne klasy. Algorytmy natomiast zostały zaimplementowane z użyciem biblioteki sklearn wykorzystując metody KNeighborsClassifier oraz NearestCentroid zwracające wybrany klasyfikator. Na jego podstawie trenowany był zbiór uczący przy pomocy metody fit, a następnie przy pomocy funkcji predict przyjmującej jako parametr zbiór testowy dokonywana była diagnoza. Otrzymane wartości klasyfikacji porównano z rzeczywistym stanem badanego obiektu wykorzystując opisane w kolejnej części metryki klasyfikacji.
 
 
 %---------------------------------------------------------
@@ -173,16 +176,61 @@ W tabeli \ref{parametry_klasyfiacji} zostały przedstawione parametry wejściowe
 	\end{tabular}
 \end{table}
 
-Opis wykorzystanych metryk klasyfikacji:
-\newline
-accuracy - porównuje przewidywane wartości klasyfikacji z ich rzeczywistym stanem, diagnoza jest zgodna tylko w przypadku dokładnie przewidzianego wyniku.
-\newline
-balanced - metryka wykorzystywana przy niezbalansowanych zbiorach danych. Jest zdefiniowana jako średnia uzyskana dla każdej klasy [!].
-\newline
-cohen kappa -  
-\newline\newline
+\centerline{\textbf{Opis wykorzystanych metryk klasyfikacji \cite{bib4}: }}
+Podczas omawiania metryk, do lepszego zrozumienia ich działania wprowadzony został przykład, który przeliczany jest dla każdej z metryk. Funkcje te, do wyznaczenia dokładności działania klasyfikatora wykorzystują jako pierwszy parametr zbiór etykiet zgodny z stanem rzeczywistym  obiektów ($y_{true}$) oraz zbiór przewidywanych klas przypisywanych przez klasyfikator ($y_{pred}$). Poniżej znajdują się przykładowe oba zbiory wykorzystane w dalszych rozważaniach. \\
+\begin{center}
+$ y_{true} = [A, B, A, A, B, A]$ \\
+$ y_{pred} = [A, B, A, A, A, B]$ \\
+\end{center}
+\textbf{Accuracy} - porównuje przewidywane wartości klasyfikacji z ich rzeczywistym stanem, diagnoza jest zgodna tylko w przypadku dokładnie przewidzianego wyniku. W naszym przykładzie, składającym się z 6 obiektów, 4 klasyfikator przypisał prawidłowo. W związku z tym jego dokładność przy pomocy tej metryki będzie wynosiła w przybliżeniu 0,66.
+\begin{center}
+$ score_{accuracy} = 0,(66) $
+\end{center}
+\textbf{Balanced} - metryka wykorzystywana przy niezbalansowanych zbiorach danych. Jest zdefiniowana jako średnia poprawnych wyników uzyskana dla poszczególnych klas. W przykładzie powyżej mamy dwie klasy A (4 obiekty) i B (2 obiekty). Do klasy A poprawnie zaklasyfikowano 3  obiekty, co daje nam wynik poprawności 0,75 natomiast dla klasy B jedną próbkę w związku z tym poprawność wynosi 0,5. Ogólny wynik klasyfikatory jest średnią uzyskanych wyników:
+\begin{center}
+$ score_{balanced} = \frac{0,5+0,75}{2} = 0,625 $
+\end{center}
+\textbf{Cohen kappa} - ogólnie jest to metryka, która porównuje zgodność wyników różnych stron tzw. sędziów (oceniających przynależność do danej klasy). W naszym przypadku będzie opierała się ona o macierz konfuzji inaczej pomyłek. Jest ona narzędziem stosowanym do oceny jakości klasyfikacji. Polega na zestawieniu otrzymanych wyników z rzeczywistością w formie tabeli. Dla naszego dwu klasowego problemu rozpoznawania rozpatrywanego w niniejszej pracy będzie miała ona kształt:
+\begin{table}[H]
+\begin{tabular}{cccll}
+\cline{1-3}
+\multicolumn{1}{|c|}{}                          & \multicolumn{1}{c|}{\cellcolor[HTML]{FCFF2F}{\color[HTML]{333333} M}} & \multicolumn{1}{c|}{\cellcolor[HTML]{FCFF2F}{\color[HTML]{333333} B}} &  &  \\ \cline{1-3}
+\multicolumn{1}{|c|}{\cellcolor[HTML]{34FF34}M} & \multicolumn{1}{c|}{Tm}                                               & \multicolumn{1}{c|}{Fm}                                               &  &  \\ \cline{1-3}
+\multicolumn{1}{|c|}{\cellcolor[HTML]{34FF34}B} & \multicolumn{1}{c|}{Fb}                                               & \multicolumn{1}{c|}{Tb}                                               &  &  \\ \cline{1-3}
+                                                &                                                                       &                                                                       &  & 
+\end{tabular}
+\end{table}
+
+Zielonym kolorem oznaczone są etykiety mówiące o rzeczywistej klasie, natomiast żółty przedstawia etykiety wyników klasyfikacji. Liczby na przekątnej oznaczają prawidłowe przypisanie do klasy. Tm oznacza prawidłowe przypisane próbek do klasy raka złośliwego, Fm natomiast nieprawidłowe przypisanie obiektów z klasy złośliwej do klasy raka łagodnego. Podobnie sytuacja wygląda w przypadku klasy B. W przypadku naszego przykładu znajdującego się w tym punkcie powyżej, macierz wraz z uzupełnionymi wartościami wygląda następująco.
+
+\begin{table}[H]
+\begin{tabular}{cccll}
+\cline{1-3}
+\multicolumn{1}{|c|}{}                          & \multicolumn{1}{c|}{\cellcolor[HTML]{FFFFFF}{\color[HTML]{333333} A}} & \multicolumn{1}{c|}{\cellcolor[HTML]{FFFFFF}{\color[HTML]{333333} B}} &  &  \\ \cline{1-3}
+\multicolumn{1}{|c|}{\cellcolor[HTML]{FFFFFF}A} & \multicolumn{1}{c|}{3}                                                & \multicolumn{1}{c|}{1}                                                &  &  \\ \cline{1-3}
+\multicolumn{1}{|c|}{\cellcolor[HTML]{FFFFFF}B} & \multicolumn{1}{c|}{1}                                                & \multicolumn{1}{c|}{1}                                                &  &  \\ \cline{1-3}
+                                                &                                                                       &                                                                       &  & 
+\end{tabular}
+\end{table}
+
+Do obliczenia współczynniku dokładności metryki Cohen cappa wykorzystywany jest następujący wzór.
+\begin{center}
+$ k = \frac{p_{0}-p_{e}}{1-p_{e}}$ \\
+\end{center}
+
+I tak $p_{0}$ jest prawdopodobieństwem poprawnie przypisanych obiektów, w tym przykładzie było ich 4, co daje ułamek 0,(66). Natomiast $p_{e}$ składa się z prawdopodobieństwa przypisania do klasy A przez obie strony (sędziów, w naszym przypadku klasyfikatora i rzeczywistości). Wynik tego działania znajduje się poniżej wraz z obliczoną poprawnością.
+\begin{center}
+$ p_{e} = p_{A} + p_{B} $ \\
+$ p_{A} = \frac{4}{6} * \frac{4}{6} = \frac{4}{9}$ \\
+$ p_{B} = \frac{2}{6} * \frac{2}{6} = \frac{1}{9}$ \\
+$ p_{e} = \frac{5}{9} $ \\
+
+$ k = \frac{\frac{2}{3}-\frac{5}{9}}{1 - \frac{5}{9}} = \frac{\frac{1}{9}}{\frac{4}{9}} = 0,25 $ \\
+\end{center}
+
 \indent Pozostałe parametry klasyfikacji zostały wyjaśnione we wcześniejszych rozważaniach pracy bądź zostały pominięte przez autorów pracy w związku z ich małym stopniem skomplikowania.
 \newline
+\subsection{Badania}
 \indent  Przeprowadzenie badań odbyło się z wykorzystaniem 5 razy powtarzanej metody 2-krotnej walidacji krzyżowej. Wszystkich pacjentów losowo podzielono na wspominany zbiór uczący oraz testujący. Następnie uruchomiono na testowanych obiektach poszczególne algorytmy zmieniając kolejno wyżej wymienione rodzaje parametrów. Dodatkowo zmieniano liczbę cech w wektorze opisującym próbki od wartości 1 aż do 26 (4 próbki odpadły po wykonaniu rankingu cech). Dla każdej konfiguracji zapisano wyniki. Po wykonanych badaniach zamieniono zbiory. Zbiór uczący stał się testującym i na odwrót, zbiór testujący uczącym. Po raz kolejny wykonano badania a wyniki zapisano. Proces ten, rozpoczynający się od losowania zbioru powtórzono pięciokrotnie, co sprawiło, że osiągnięte wyniki będą bardziej wiarygodne.
 \newline
 \indent W związku z dużą liczbą danych wynikających z ilością zmiennych parametrów, badania nie są przeprowadzone dla wszystkich możliwych konfiguracji (zmniejszyłaby się czytelność i utrudniłoby to analizę wyników). Najpierw przeprowadzone zostało porównanie metryk sprawdzających poprawność diagnoz, biorąc pod uwagę wszystkie zaimplementowane algorytmy. Następnie dla najskuteczniejszej metryki przetestowano algorytmy, sprawdzając osiągane przez nie dokładności. Dla najlepszej konfiguracji wspomnianych wyżej parametrów porównano zostały metryki odległości, a na koniec przyrównano wyniki osiągane z normalizacją wektora cech poszczególnych pacjentów oraz bez normalizacji. Osiągnięte rezultaty oraz wnioski z nich wynikające przedstawiono w dalszej części pracy.
@@ -201,7 +249,7 @@ cohen kappa -
 % Porownanie metryk 
 
 %-------------------------EUKLIDES--------------------------
-\subsection{Porównanie metryk}
+\subsection{Porównanie metryk klasyfikacji}
 \subsubsection{Euklides}
 \begin{figure}[H]
 	\centering
@@ -335,17 +383,20 @@ Porównanie metryk wyszło super, algorytmy śmigały aż miło. Raka diagnozowa
 \addcontentsline{toc}{section}{Bibliografia} %utworzenie w spisie treści pozycji Bibliografia
 \begin{thebibliography}{9}
 
-\bibitem{bib1}  https://en.wikipedia.org/wiki/Nearest_centroid_classifier
+\bibitem{bib1}  https://en.wikipedia.org/wiki/Nearest\_centroid\_classifier
 
 [Dostęp: 10.05.2019]
 
-\bibitem{bib2}  https://www.researchgate.net/figure/Schematic-diagram-illustrating-the-classification-of-pixel-4-using-minimum-distance_fig3_294596525
+\bibitem{bib2}  https://www.researchgate.net/figure/Schematic-diagram-illustrating-the-classification-of-pixel-4-using-minimum-distance\_fig3\_294596525
 
 [Dostęp: 10.05.2019]
 
-\bibitem{bib3}  https://www.researchgate.net/figure/K-nearest-neighbor-classifier-KNN-for-k-1-und-k-3_fig6_224345777
+\bibitem{bib3}  %\https://www.researchgate.net/figure/K-nearest-neighbor-classifier-KNN-for-k-1-und-k-3_fig6_224345777
 
 [Dostęp: 10.05.2019]
+
+\bibitem{bib4}  %https://scikit-learn.org/stable/modules/model_evaluation.html
+[Dostęp: 11.05.2019]
 
 \end{thebibliography}
 
