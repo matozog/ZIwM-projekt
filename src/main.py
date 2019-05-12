@@ -118,20 +118,19 @@ def main():
     # dic["Z"].getAlgorithmsResults()["0nm_alg"][0].append(0.02)
     # print(dic)
 
-
     # for asdf in ksData:
     #         print("{} ({}, {})".format(asdf.getParamID(), asdf.geStatistic(), asdf.getPValue()))
 
     features = [7, 17, 4, 5, 12]
     # [ksData[i].getParamID() for i in range(0, 5)]
-    accuracy_knn_alg, matrix = knn_alg(teachingSet, testSet, [ksData[i].getParamID() for i in range(0, 5)], 1, algParameters.getDistanceMetrics()[1], algParameters.getNormalization()[1], algParameters.getMetrics()[0])
-    accuracy_knn_alg1, matrix1 = knn_alg(teachingSet, testSet, [ksData[i].getParamID() for i in range(0, 5)], 1, algParameters.getDistanceMetrics()[1], algParameters.getNormalization()[1], algParameters.getMetrics()[1])
+    # accuracy_knn_alg, matrix = knn_alg(teachingSet, testSet, [ksData[i].getParamID() for i in range(0, 5)], 1, algParameters.getDistanceMetrics()[1], algParameters.getNormalization()[1], algParameters.getMetrics()[0])
+    # accuracy_knn_alg1, matrix1 = knn_alg(teachingSet, testSet, [ksData[i].getParamID() for i in range(0, 5)], 1, algParameters.getDistanceMetrics()[1], algParameters.getNormalization()[1], algParameters.getMetrics()[1])
 
-    accuracy_nm_alg, matrix = nm_alg(teachingSet, testSet, [ksData[i].getParamID() for i in range(0, 5)], algParameters.getDistanceMetrics()[1], algParameters.getNormalization()[1], algParameters.getMetrics()[0])
+    # accuracy_nm_alg, matrix = nm_alg(teachingSet, testSet, [ksData[i].getParamID() for i in range(0, 5)], algParameters.getDistanceMetrics()[1], algParameters.getNormalization()[1], algParameters.getMetrics()[0])
 
-
-    print(accuracy_knn_alg)
-    print(accuracy_knn_alg1)
+    # print(matrix)
+    # print(accuracy_knn_alg)
+    # print(accuracy_knn_alg1)
     # print(accuracy_nm_alg1)
     # print(accuracy_nm_alg2)
     # print(accuracy_nm_alg3)

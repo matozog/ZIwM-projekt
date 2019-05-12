@@ -18,6 +18,7 @@ def nm_alg(teachingSet, testSet, features, distanceMetrics, normalization, metri
     # accuracy_balanced = balanced_accuracy_score(testDataLabelFeatures, predictions)
     accuracy_confusion_matrix = confusion_matrix(testDataLabelFeatures, predictions)
     # tn, fp, fn, tp = confusion_matrix(testDataLabelFeatures, predictions).ravel()
+    # print(confusion_matrix(testDataLabelFeatures, predictions))
     #
     # print(score)
     # print(accuracy_balanced)
