@@ -109,19 +109,38 @@ def main():
     ksData = kolmogorovTest(dataSet, amountOfFeatures)
     # createReasearches(patients, algorithms, ksData, algParameters)
 
+    # creating confusion matrix
+    accuracy_nm_alg, matrix = nm_alg(teachingSet, testSet, [ksData[i].getParamID() for i in range(0, 26)],
+                                     algParameters.getDistanceMetrics()[1], algParameters.getNormalization()[1],
+                                     algParameters.getMetrics()[0])
+    print("26 cech, manhatan, bez normalizacji, accuracy, NM", accuracy_nm_alg, "\n" ,matrix)
+    accuracy_knn_alg1, matrix1 = knn_alg(teachingSet, testSet, [ksData[i].getParamID() for i in range(0, 26)], 1,
+                                       algParameters.getDistanceMetrics()[1], algParameters.getNormalization()[1],
+                                       algParameters.getMetrics()[0])
+    print("26 cech, manhatan, bez normalizacji, accuracy, 1-NN", accuracy_knn_alg1, "\n" , matrix1)
+    accuracy_knn_alg2, matrix2 = knn_alg(teachingSet, testSet, [ksData[i].getParamID() for i in range(0, 26)], 5,
+                                       algParameters.getDistanceMetrics()[1], algParameters.getNormalization()[1],
+                                       algParameters.getMetrics()[0])
+    print("26 cech, manhatan, bez normalizacji, accuracy, 5-NN", accuracy_knn_alg2,"\n", matrix2)
+    accuracy_knn_alg3, matrix3 = knn_alg(teachingSet, testSet, [ksData[i].getParamID() for i in range(0, 26)], 9,
+                                       algParameters.getDistanceMetrics()[1], algParameters.getNormalization()[1],
+                                       algParameters.getMetrics()[0])
+    print("26 cech, manhatan, bez normalizacji, accuracy, 9-NN", accuracy_knn_alg3, "\n", matrix3)
+    accuracy_knn_alg4, matrix4 = knn_alg(teachingSet, testSet, [ksData[i].getParamID() for i in range(0, 26)], 9,
+                                       algParameters.getDistanceMetrics()[0], algParameters.getNormalization()[1],
+                                       algParameters.getMetrics()[1])
+    print("26 cech, euklides, bez normalizacji, balanced, 9-NN", accuracy_knn_alg4,"\n" , matrix4)
+    accuracy_knn_alg5, matrix5 = knn_alg(teachingSet, testSet, [ksData[i].getParamID() for i in range(0, 26)], 9,
+                                       algParameters.getDistanceMetrics()[0], algParameters.getNormalization()[0],
+                                       algParameters.getMetrics()[1])
+    print("26 cech, euklides, z normalizacja, balanced, 9-NN", accuracy_knn_alg5, "\n" ,matrix5)
 
-    # dic = {}
-    # dic["W"] = ClassificationResult(ksData.__len__(), "accuracy", "euclidean", True)
-    # dic["Z"] = ClassificationResult(ksData.__len__(), "accuracy", "euclidean", False)
-    # dic["Z"][0] = []
-    # dic["W"][0] = []
-    # dic["Z"].getAlgorithmsResults()["0nm_alg"][0].append(0.02)
-    # print(dic)
+    #others calculations
 
     # for asdf in ksData:
     #         print("{} ({}, {})".format(asdf.getParamID(), asdf.geStatistic(), asdf.getPValue()))
 
-    features = [7, 17, 4, 5, 12]
+    # features = [7, 17, 4, 5, 12]
     # [ksData[i].getParamID() for i in range(0, 5)]
     # accuracy_knn_alg, matrix = knn_alg(teachingSet, testSet, [ksData[i].getParamID() for i in range(0, 5)], 1, algParameters.getDistanceMetrics()[1], algParameters.getNormalization()[1], algParameters.getMetrics()[0])
     # accuracy_knn_alg1, matrix1 = knn_alg(teachingSet, testSet, [ksData[i].getParamID() for i in range(0, 5)], 1, algParameters.getDistanceMetrics()[1], algParameters.getNormalization()[1], algParameters.getMetrics()[1])
