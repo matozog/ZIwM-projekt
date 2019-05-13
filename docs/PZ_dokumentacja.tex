@@ -98,7 +98,7 @@ Tematem naszego projektu jest wspomniane w tytule, komputerowe wspomaganie diagn
 	\end{tabular}
 \end{table}
 \indent Podsumowując analizę przedstawionego problemu rozpoznawania, pacjentów z grupy testowej będziemy przyporządkowywać do jednej z dwóch klas. Więcej informacji empirycznej posiadamy na temat klasy reprezentującej nowotwór łagodny, co jest spowodowane większą liczbą kobiet w jego gronie. Każda z pacjentek posiada 30 cech, które przedstawione są za pomocą wielowartościowych liczb rzeczywistych. Pojedyncza cecha z pewną dokładnością wyznacza klasyfikację do danej grupy. W celu uzyskania dokładniejszych wyników w procesie rozpoznawania będziemy przeprowadzali ranking cech, wykorzystując kryterium Kołmogorova-Smirnova, które porządkuje parametry pacjentów rozpoczynając od cech o~największym znaczeniu. Sam proces rozpoznawania opierać się będzie na implementacji klasyfikatorów minimalno-odległościowych tj. NM (nearest mean), NN (nearest neighbour) oraz KNN (k-nearest neighbours).
-
+\newpage
 %---------------------------------------------------------
 %					Część druga
 %---------------------------------------------------------
@@ -414,8 +414,114 @@ Wyniki zostały przedstawione w formie tabel, wykresów oraz macierzy konfuzji (
 	
 \end{figure}
 \subsection{Macierz konfuzji}
-\indent Poniżej przedstawiono przykładowe macierze konfuzji dla każdego z klasyfikatorów. Dane wejściowe tzn. zbiór testowy oraz uczący jest taki sam dla każdej macierzy. Zgodnie z wnioskami, które przedstawiono w następnym punkcie pracy algorytmy zostały uruchomione z maksymalną wielkością wektora cech bez jego normalizacji (w tej konfiguracji uzyskiwano najlepsze wyniki). Dla każdej z macierzy poniżej znajduje się opis wyjaśniający poszczególne zależności.
+\indent Poniżej przedstawiono przykładowe macierze konfuzji dla każdego z klasyfikatorów. Dane wejściowe tzn. zbiór testowy oraz uczący jest taki sam dla każdej macierzy (zbiór testowy wynosi 265 próbek). Zgodnie z wnioskami, które przedstawiono w następnym punkcie pracy algorytmy zostały uruchomione z maksymalną wielkością wektora cech (w tej konfiguracji uzyskiwano większość z najlepszych wyników). Dla każdej z macierzy poniżej znajduje się opis wyjaśniający poszczególne zależności.\\
+% 26 cech, manhatan, bez normalizacji, accuracy, NM 0.9052631578947369 
+\indent W tabeli \ref{accuracy_nm_manhatan_bnorm} znajdują się wyniki dla klasyfikatora najbliższej średniej wykorzystującego normę odległości manhatan bez normalizacji wektora cech. Wynik liczony jest przy pomocy metryki accuracy. Na przekątnej znajdują się prawidłowo zaklasyfikowane obiekty, dając nam dokładność klasyfikatora wynoszącą: 91\%. Najwięcej problemów algorytm miał z przyporządkowaniem klasy raka złośliwego. Aż w 23 przypadkach na 108 się pomylił, co jest dość dużą wartością (około 21\%). 
+\begin{table}[H]
+\begin{center}
+\captionof{table}{Macierz konfuzji dla algorytmu NM wykorzystując normę manhatan}
+\label{accuracy_nm_manhatan_bnorm} 
+\begin{LARGE}
+\begin{tabular}{l|l|c|}
+\cline{2-3}
+                        & B & M \\ \hline
+\multicolumn{1}{|l|}{B} & 173 & 4 \\ \hline
+\multicolumn{1}{|l|}{M} & 23 & 85 \\ \hline
+\end{tabular}
+\end{LARGE}
+\end{center}
+\end{table}
 
+%26 cech, manhatan, bez normalizacji, accuracy, 1-NN 0.9298245614035088 
+\indent W tabeli \ref{accuracy_1-NN_manhatan_bnorm} znajdują się wyniki dla algorytmu 1-NN z takimi samymi parametrami (norma manhatan, wektor bez normalizacji). Poprawność diagnoz tego klasyfikatora w przybliżeniu wynosi 93\%. Najwięcej problemu algorytm po raz kolejny miał z przypisaniem klasy raka złośliwego. W tym przypadku jednak jest o wiele lepiej niż przy algorytmie najbliższej średniej (11 przypadków źle zaklasyfikowanych).
+
+\begin{table}[H]
+\begin{center}
+\captionof{table}{Macierz konfuzji dla algorytmu 1-NN wykorzystując normę manhatan}
+\label{accuracy_1-NN_manhatan_bnorm} 
+\begin{LARGE}
+\begin{tabular}{l|c|c|}
+\cline{2-3}
+                        & B & M \\ \hline
+\multicolumn{1}{|l|}{B} & 168 & 9 \\ \hline
+\multicolumn{1}{|l|}{M} & 11 & 97 \\ \hline
+\end{tabular}
+\end{LARGE}
+\end{center}
+\end{table}
+
+% 26 cech, manhatan, bez normalizacji, accuracy, 5-NN 0.9543859649122807 
+\indent Poniżej w tabeli \ref{accuracy_5-NN_manhatan_bnorm} znajdują się wyniki klasyfikacji dla algorytmu najbliższych sąsiadów z parametrem k równym 5 oraz parametrami wejściowymi takimi samymi jak w przykładach wyżej. Prawidłowość diagnoz wynosi lekko ponad 95\%. I w tym przypadku najwięcej problemów jest z przypisaniem klasy raka złośliwego, jednak błąd został zarejestrowany w tylko 9 próbkach na 108 przypadków (około 8\%).  
+
+\begin{table}[H]
+\begin{center}
+\captionof{table}{Macierz konfuzji dla algorytmu 5-NN wykorzystując normę manhatan}
+\label{accuracy_5-NN_manhatan_bnorm} 
+\begin{LARGE}
+\begin{tabular}{l|c|c|}
+\cline{2-3}
+                        & B & M \\ \hline
+\multicolumn{1}{|l|}{B} & 173 & 4 \\ \hline
+\multicolumn{1}{|l|}{M} & 9 & 99 \\ \hline
+\end{tabular}
+\end{LARGE}
+\end{center}
+\end{table}
+
+% 26 cech, manhatan, bez normalizacji, accuracy, 9-NN 0.9403508771929825 
+\indent Ostatnim do porównania został klasyfikator 9 najbliższych sąsiadów. Wyniki są bardzo podobne jak w przypadku wyżej(5-NN). Po raz kolejny zauważamy problemy przy klasyfikacji pacjentek posiadających raka złośliwego i przypisanie ich do grupy pacjentek z rakiem łagodnym.
+
+\begin{table}[H]
+\begin{center}
+\captionof{table}{Macierz konfuzji dla algorytmu 9-NN wykorzystując normę manhatan}
+\label{accuracy_9-NN_manhatan_bnorm} 
+\begin{LARGE}
+\begin{tabular}{l|c|c|}
+\cline{2-3}
+                        & B & M \\ \hline
+\multicolumn{1}{|l|}{B} & 172 & 5 \\ \hline
+\multicolumn{1}{|l|}{M} & 12 & 96 \\ \hline
+\end{tabular}
+\end{LARGE}
+\end{center}
+\end{table}
+
+% 26 cech, euklides, bez normalizacji, balanced, 9-NN 0.9218455743879472 
+\indent W tabeli \ref{balanced_9-NN_euklides_bnorm} przedstawione zostały wyniki dla algorytmu najbliższych sąsiadów dla k równego 9. Wykorzystano metrykę klasyfikacji balanced oraz normę odległości manhatan bez normalizacji wektora cech. Poprawność klasyfikatora wyniosła ostatecznie około 92\% (w przypadku metryki accuracy około 94\%). Nie zmienił się problem dotyczący przypisywania pacjentek z rakiem złośliwym dla grupy z rakiem łagodnym.
+
+\begin{table}[H]
+\begin{center}
+\captionof{table}{Macierz konfuzji dla algorytmu 9-NN wykorzystując normę euklides}
+\label{balanced_9-NN_euklides_bnorm} 
+\begin{LARGE}
+\begin{tabular}{l|c|c|}
+\cline{2-3}
+                        & B & M \\ \hline
+\multicolumn{1}{|l|}{B} & 169 & 8 \\ \hline
+\multicolumn{1}{|l|}{M} & 12 & 96 \\ \hline
+\end{tabular}
+\end{LARGE}
+\end{center}
+\end{table}
+
+% 26 cech, euklides, z normalizacja, balanced, 9-NN 0.9182360326428123 
+\indent Ostatnia macierz przedstawiona w niniejszym punkcie pracy obrazuje wyniki również dla algorytmu 9 najbliższych sąsiadów wykorzystującego metrykę balanced. W tym przypadku jednak dokonano normalizacji wektora cech. Dokładność klasyfikacji przy tej metryce spadła o ułamki procentów (około 0,004 punktu procentowego) zmieniając stosunek prawidłowo przypisanych pacjentek z rakiem łagodnym do prawidłowo przypisanych  z rakiem złośliwym, niestety na korzyść groźniejszej wersji choroby (więcej błędów przypisania pacjentek z rakiem złośliwym).
+
+
+\begin{table}[H]
+\begin{center}
+\captionof{table}{Macierz konfuzji dla algorytmu 9-NN wykorzystując normę euklides}
+\label{balanced_9-NN_euklides_norm} 
+\begin{LARGE}
+\begin{tabular}{l|c|c|}
+\cline{2-3}
+                        & B & M \\ \hline
+\multicolumn{1}{|l|}{B} & 171 & 6 \\ \hline
+\multicolumn{1}{|l|}{M} & 14 & 94 \\ \hline
+\end{tabular}
+\end{LARGE}
+\end{center}
+\end{table}
 
 
 
