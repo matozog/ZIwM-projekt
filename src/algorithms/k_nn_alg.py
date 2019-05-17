@@ -8,9 +8,6 @@ def knn_alg(teachingSet, testSet, features, kValue, distanceMetrics, normalizati
     trainDataFeatures, trainDataLabelFeatures = prepareDataSet(teachingSet, features, normalization)
     testDataFeatures, testDataLabelFeatures = prepareDataSet(testSet, features, normalization)
 
-    # print(trainDataFeatures)
-    # print(trainDataLabelFeatures)
-
     classifier = neighbors.KNeighborsClassifier(n_neighbors=kValue, metric=distanceMetrics)
     classifier.fit(trainDataFeatures, trainDataLabelFeatures)
     predictions = classifier.predict(testDataFeatures)

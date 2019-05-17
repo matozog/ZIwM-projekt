@@ -147,7 +147,7 @@ $ y=argmin_{l\in{Y}}||\vec{U_{l}}-\vec{T}|| $ \cite{bib1}
 %---------------------------------------------------------
 \section{Informacja o środowisku implementacyjnym}
 
-\indent Badania zostały przeprowadzone przy pomocy języka Python w wersji 3.6. Do stworzenia rankingu cech przy użyciu kryterium Kołmogorova-Smirnova, dla każdego z parametru została użyta metoda ks\_2samp z biblioteki scipy, przyjmująca dwa wektory opisujące poszczególne klasy. Algorytmy natomiast zostały zaimplementowane z użyciem biblioteki sklearn wykorzystując metody KNeighborsClassifier oraz NearestCentroid zwracające wybrany klasyfikator. Na jego podstawie trenowany był zbiór uczący przy pomocy metody fit, a następnie przy pomocy funkcji predict przyjmującej jako parametr zbiór testowy dokonywana była diagnoza. Otrzymane wartości klasyfikacji porównano z rzeczywistym stanem badanego obiektu wykorzystując opisane w kolejnej części metryki klasyfikacji.
+\indent Badania zostały przeprowadzone przy pomocy języka Python w wersji 3.6\footnote{https://github.com/matozog/ZIwM-projekt}. Do stworzenia rankingu cech przy użyciu kryterium Kołmogorova-Smirnova, dla każdego z parametru została użyta metoda ks\_2samp z biblioteki scipy, przyjmująca dwa wektory opisujące poszczególne klasy. Algorytmy natomiast zostały zaimplementowane z użyciem biblioteki sklearn wykorzystując metody KNeighborsClassifier oraz NearestCentroid zwracające wybrany klasyfikator. Na jego podstawie trenowany był zbiór uczący przy pomocy metody fit, a następnie przy pomocy funkcji predict przyjmującej jako parametr zbiór testowy dokonywana była diagnoza. Otrzymane wartości klasyfikacji porównano z rzeczywistym stanem badanego obiektu wykorzystując opisane w kolejnej części metryki klasyfikacji.
 
 
 %---------------------------------------------------------
@@ -418,7 +418,7 @@ Wyniki zostały przedstawione w formie tabel, wykresów oraz macierzy konfuzji (
 \captionof{table}{Macierz konfuzji dla algorytmu NM wykorzystując normę manhatan}
 \label{accuracy_nm_manhatan_bnorm} 
 \begin{LARGE}
-\begin{tabular}{l|l|c|}
+\begin{tabular}{l|c|c|}
 \cline{2-3}
                         & B & M \\ \hline
 \multicolumn{1}{|l|}{B} & 173 & 4 \\ \hline
