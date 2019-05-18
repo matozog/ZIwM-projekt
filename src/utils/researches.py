@@ -4,6 +4,8 @@ from src.models.classification_result import ClassificationResult
 from src.algorithms import nm_alg, knn_alg
 from src.utils.csv_file_writer import saveDataToFile
 
+# parameters to cross validation
+amountOfLoops = 5
 
 def createTeachingAndTestSets(patients):
     teachingSet = []
@@ -26,15 +28,15 @@ def createTeachingAndTestSets(patients):
 
 def createResearches(patients, algorithms,ksData ,algParameters):
 
-    halo = {}
+    tmp = {}
     for metric in algParameters.getMetrics():
         for disMetric in algParameters.getDistanceMetrics():
             for norm in algParameters.getNormalization():
-                halo[metric+disMetric+str(norm)] = ClassificationResult(ksData.__len__(), metric, disMetric, norm)
+                tmp[metric+disMetric+str(norm)] = ClassificationResult(ksData.__len__(), metric, disMetric, norm)
 
-    for k in range(0, 1):
+    for k in range(0, amountOfLoops):
         teachingSet, testSet = createTeachingAndTestSets(patients)
-        for w in range(0, 1):
+        for w in range(0, 2):
             for metric in algParameters.getMetrics():
                 for disMetric in algParameters.getDistanceMetrics():
                     for norm in algParameters.getNormalization():
@@ -42,7 +44,7 @@ def createResearches(patients, algorithms,ksData ,algParameters):
                             features = []
                             for param in range(i+1):
                                 features.append(ksData[param].getParamID())
-                            calulateResultForAlgorithms(teachingSet, testSet, features, algorithms, halo[metric+disMetric+str(norm)], i)
+                            calulateResultForAlgorithms(teachingSet, testSet, features, algorithms, tmp[metric+disMetric+str(norm)], i)
             var = testSet
             testSet = teachingSet
             teachingSet = var
@@ -50,7 +52,7 @@ def createResearches(patients, algorithms,ksData ,algParameters):
     for metric in algParameters.getMetrics():
         for disMetric in algParameters.getDistanceMetrics():
             for norm in algParameters.getNormalization():
-                saveDataToFile(halo[metric+disMetric+str(norm)])
+                saveDataToFile(tmp[metric+disMetric+str(norm)])
 
 
 def calulateResultForAlgorithms(teachingSet, testSet, features, algorithms, classificationResults, amountOfFeatures):
