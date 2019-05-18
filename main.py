@@ -20,7 +20,8 @@ def main():
     algParameters = AlgParameters()
     ksData = kolmogorovTest(dataSet, amountOfFeatures)
 
-    createResearches(patients, algorithms, ksData, algParameters)  # function using to create researches
+    # function to create researches (save results to .csv file)
+    # createResearches(patients, algorithms, ksData, algParameters)  # function using to create researches
 
     # creating example confusion matrix
     accuracy_nm_alg, matrix = nm_alg(teachingSet, testSet, [ksData[i].getParamID() for i in range(0, 26)],
