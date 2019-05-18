@@ -8,7 +8,7 @@ from src.utils.researches import createResearches, createTeachingAndTestSets
 #   dataSet - {B/M: { number of parameter: [] }
 
 def main():
-    file_name = "../resources/wdbc.data"
+    file_name = "resources/wdbc.data"
     size_of_data = 32
     amountOfFeatures = 30
     patients = file_reader.loadDataFromFile(file_name, size_of_data)
